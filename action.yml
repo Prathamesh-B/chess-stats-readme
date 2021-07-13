@@ -1,0 +1,22 @@
+name: "Chess Stats Readme"
+author: Prathamesh Bhalekar
+description: "Update your Readme with Chess.com stats"
+
+inputs:
+  GH_TOKEN:
+    description: "GitHub access token with Repo scope"
+    required: true
+    default: ${{ github.token }}
+
+  CHESS_USERNAME:
+    description: "Chess.com user name"
+    required: true
+    default: ${{ github.username }}
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "grid"
+  color: "green"
