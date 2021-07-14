@@ -4,7 +4,6 @@ from github import Github, GithubException
 import re
 import base64
 import requests
-import json
 
 GH_TOKEN = os.getenv("INPUT_GH_TOKEN")
 CHESS_USERNAME = os.getenv("INPUT_CHESS_USERNAME")
@@ -33,7 +32,10 @@ def get_stats():
                 ratings.append(eval(query))
         string += f"> ⏲️ Rapid: {ratings[0]}\n > \n"
         string += f"> ⚡ Blitz: {ratings[2]}\n > \n"
-        string += f"> 💣 Rapid: {ratings[0]}\n > \n"
+        string += f"> 💣 Rapid: {ratings[4]}\n > \n"
+        return string
+    else:
+        sys.exit(1)
 
 
 def generate_new_readme(stats: str, readme: str) -> str:
@@ -58,7 +60,10 @@ if __name__ == "__main__":
     if new_readme != rdmd:
         repo.update_file(
             path=contents.path,
-            message="Update Readme",
+            message="Update readme chess stats",
             content=new_readme,
             sha=contents.sha,
         )
+        print("Success")
+    else:
+        print("No change")
