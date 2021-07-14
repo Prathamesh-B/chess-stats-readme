@@ -32,7 +32,7 @@ def get_stats():
                 ratings.append(eval(query))
         string += f"> ⏲️ Rapid: {ratings[0]}\n > \n"
         string += f"> ⚡ Blitz: {ratings[2]}\n > \n"
-        string += f"> 💣 Rapid: {ratings[4]}\n > \n"
+        string += f"> 💣 Bullet: {ratings[4]}\n > \n"
         return string
     else:
         sys.exit(1)
