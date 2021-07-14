@@ -12,6 +12,11 @@ inputs:
     description: "Chess.com user name"
     required: true
 
+  REPOSITORY:
+    description: "Your GitHub repository"
+    default: ${{ github.repository }}
+    required: false
+
 runs:
   using: "docker"
   image: "Dockerfile"
