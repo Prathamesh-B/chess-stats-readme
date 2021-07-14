@@ -1,14 +1,6 @@
 # Chess.com Stats in Readme
 
-```md
-**♟️ My Chess.com Stats**
-
-> ⏲️ Rapid: 907
->
-> ⚡ Blitz: 465
->
-> 💣 Bullet: 937
-```
+![image](img/example.png "Example")
 
 ## Update your Readme
 
@@ -59,4 +51,4 @@ Please make sure to update tests as appropriate.
 
 ## Inspired From
 
-[anmol098/waka-readme-stats](https://https://github.com/anmol098/waka-readme-stats)
+[anmol098/waka-readme-stats](https://github.com/anmol098/waka-readme-stats)
