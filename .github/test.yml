@@ -1,0 +1,15 @@
+name: Test Chess Stats Readme
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  update-readme:
+    name: Print Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Prathamesh-B/chess-stats-readme@master
+        with:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          CHESS_USERNAME: ${{ secrets.CHESS_USERNAME }}
