@@ -1,6 +1,14 @@
 # Chess.com Stats in Readme
 
-![image](img/example.png "Example")
+```md
+**♟️ My Chess.com Stats**
+
+> ⏲️ Rapid: 907
+>
+> ⚡ Blitz: 465
+>
+> 💣 Bullet: 937
+```
 
 ## Update your Readme
 
