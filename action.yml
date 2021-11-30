@@ -17,6 +17,11 @@ inputs:
     default: ${{ github.repository }}
     required: false
 
+  RATING_TYPE:
+    description: "Use your best or most recent ratings."
+    default: last
+    required: false
+
 runs:
   using: "docker"
   image: "Dockerfile"

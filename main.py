@@ -8,7 +8,7 @@ import requests
 GH_TOKEN = os.getenv("INPUT_GH_TOKEN")
 CHESS_USERNAME = os.getenv("INPUT_CHESS_USERNAME")
 REPOSITORY = os.getenv("INPUT_REPOSITORY")
-RATING_TYPE = 'last' if os.getenv("INPUT_RATING_TYPE") == None else os.getenv("RATING_TYPE")
+RATING_TYPE = os.getenv("RATING_TYPE")
 
 START_COMMENT = "<!--START_SECTION:Chess-->"
 END_COMMENT = "<!--END_SECTION:Chess-->"
