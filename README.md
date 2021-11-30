@@ -35,6 +35,7 @@ jobs:
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           CHESS_USERNAME: <Your Chess.com Username>
+          INPUT_RATING_TYPE : <string best or last>
 ```
 
 - Now you can commit and wait for it to run automatically.
