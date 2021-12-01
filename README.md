@@ -26,6 +26,7 @@ on:
   schedule:
     # Runs at 12am IST
     - cron: "30 18 * * *"
+  workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the Github Actions Workflow page directly
 jobs:
   update-readme:
     name: Update readme with chess stats
@@ -34,11 +35,21 @@ jobs:
       - uses: Prathamesh-B/chess-stats-readme@master
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          CHESS_USERNAME: <Your Chess.com Username>
-          INPUT_RATING_TYPE : <string best or last>
+          CHESS_USERNAME: <Your chess.com Username>
+          RATING_TYPE : <'best' or 'last'>
 ```
 
 - Now you can commit and wait for it to run automatically.
+
+## Flags
+
+The following are the list of available flags:
+
+| Option | Default Value | Description | Required |
+|--------|--------|--------|--------|
+| `RATING_TYPE` | last | Use your best or most recent ratings.(best/last) | No |
+| `CHESS_USERNAME` |  | Your chess.com user name | Yes |
+| `GH_TOKEN` | Your GitHub token with repo scope | Use this to configure the token of the user that commits the workflow result to GitHub | No |
 
 ## Contributing
 
