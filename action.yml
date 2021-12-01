@@ -1,31 +1,31 @@
-name: "Chess Stats Readme"
-author: Prathamesh Bhalekar
-description: "Update your Readme with Chess.com stats"
+name: 'Chess Stats Readme'
+author: 'Prathamesh Bhalekar'
+description: 'Update your Readme with Chess.com stats'
 
 inputs:
   GH_TOKEN:
-    description: "GitHub access token with Repo scope"
+    description: 'GitHub access token with Repo scope'
     required: true
     default: ${{ github.token }}
 
   CHESS_USERNAME:
-    description: "Chess.com user name"
+    description: 'Chess.com user name'
     required: true
 
   REPOSITORY:
-    description: "Your GitHub repository"
+    description: 'Your GitHub repository'
     default: ${{ github.repository }}
     required: false
 
   RATING_TYPE:
-    description: "Use your best or most recent ratings."
-    default: last
+    description: 'Use your best or most recent ratings.'
+    default: 'last'
     required: false
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: 'docker'
+  image: 'Dockerfile'
 
 branding:
-  icon: "grid"
-  color: "green"
+  icon: 'grid'
+  color: 'green'
