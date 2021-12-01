@@ -8,6 +8,7 @@ import requests
 GH_TOKEN = os.getenv("INPUT_GH_TOKEN")
 CHESS_USERNAME = os.getenv("INPUT_CHESS_USERNAME")
 REPOSITORY = os.getenv("INPUT_REPOSITORY")
+RATING_TYPE = os.getenv("RATING_TYPE")
 
 START_COMMENT = "<!--START_SECTION:Chess-->"
 END_COMMENT = "<!--END_SECTION:Chess-->"
@@ -24,15 +25,15 @@ def get_stats():
     response = requests.get(f"https://api.chess.com/pub/player/{CHESS_USERNAME}/stats")
     if response.status_code == 200:
         stats_list = ["chess_rapid", "chess_blitz", "chess_bullet"]
-        ratings = []
+        ratings = {}
         string = "**♟️ My Chess.com Stats** \n\n"
         for i in stats_list:
-            for j in ["last", "best"]:
-                query = f'response.json()["{i}"]["{j}"]["rating"]'
-                ratings.append(eval(query))
-        string += f"> ⏲️ Rapid: {ratings[0]}\n > \n"
-        string += f"> ⚡ Blitz: {ratings[2]}\n > \n"
-        string += f"> 💣 Bullet: {ratings[4]}\n > \n"
+            query = f'response.json()["{i}"]["{RATING_TYPE}"]["rating"]'
+            ratings[i] = eval(query)
+        string += f"> ⏲️ Rapid: {ratings['chess_rapid']}\n > \n"
+        string += f"> ⚡ Blitz: {ratings['chess_blitz']}\n > \n"
+        string += f"> 💣 Bullet: {ratings['chess_bullet']}\n > \n"
+        print(string)
         return string
     else:
         sys.exit(1)
