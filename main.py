@@ -21,18 +21,18 @@ def decode_readme(data: str) -> str:
     return str(decoded_bytes, "utf-8")
 
 
-def get_stats():
-    response = requests.get(f"https://api.chess.com/pub/player/{CHESS_USERNAME}/stats")
+def get_stats(username: str, type: str) -> str:
+    response = requests.get(f"https://api.chess.com/pub/player/{username}/stats")
     if response.status_code == 200:
         stats_list = ["chess_rapid", "chess_blitz", "chess_bullet"]
         ratings = {}
         string = "**♟️ My Chess.com Stats** \n\n"
         for i in stats_list:
-            query = f'response.json()["{i}"]["{RATING_TYPE}"]["rating"]'
+            query = f'response.json()["{i}"]["{type}"]["rating"]'
             ratings[i] = eval(query)
-        string += f"> ⏲️ Rapid: {ratings['chess_rapid']}\n > \n"
-        string += f"> ⚡ Blitz: {ratings['chess_blitz']}\n > \n"
-        string += f"> 💣 Bullet: {ratings['chess_bullet']}\n > \n"
+        string += f"> ⏲️ Rapid: {ratings['chess_rapid']}\n>\n"
+        string += f"> ⚡ Blitz: {ratings['chess_blitz']}\n>\n"
+        string += f"> 💣 Bullet: {ratings['chess_bullet']}\n>\n"
         print(string)
         return string
     else:
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         )
         sys.exit(1)
     contents = repo.get_readme()
-    chess_stats = get_stats()
+    chess_stats = get_stats(CHESS_USERNAME,RATING_TYPE)
     rdmd = decode_readme(contents.content)
     new_readme = generate_new_readme(stats=chess_stats, readme=rdmd)
     if new_readme != rdmd:
