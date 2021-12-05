@@ -5,8 +5,8 @@ description: 'Update your Readme with Chess.com stats'
 inputs:
   GH_TOKEN:
     description: 'GitHub access token with Repo scope'
-    required: true
     default: ${{ github.token }}
+    required: false
 
   CHESS_USERNAME:
     description: 'Chess.com user name'

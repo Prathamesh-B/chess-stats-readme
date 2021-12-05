@@ -22,6 +22,7 @@ def decode_readme(data: str) -> str:
 
 
 def get_stats(username: str, type: str) -> str:
+    """Get player stats"""
     response = requests.get(f"https://api.chess.com/pub/player/{username}/stats")
     if response.status_code == 200:
         stats_list = ["chess_rapid", "chess_blitz", "chess_bullet"]
@@ -55,7 +56,7 @@ if __name__ == "__main__":
         )
         sys.exit(1)
     contents = repo.get_readme()
-    chess_stats = get_stats(CHESS_USERNAME,RATING_TYPE)
+    chess_stats = get_stats(CHESS_USERNAME, RATING_TYPE)
     rdmd = decode_readme(contents.content)
     new_readme = generate_new_readme(stats=chess_stats, readme=rdmd)
     if new_readme != rdmd:
