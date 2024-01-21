@@ -5,10 +5,10 @@ import re
 import base64
 import requests
 
-GH_TOKEN = os.environ("INPUT_GH_TOKEN")
-CHESS_USERNAME = os.environ("INPUT_CHESS_USERNAME")
-REPOSITORY = os.environ("INPUT_REPOSITORY")
-RATING_TYPE = os.environ("INPUT_RATING_TYPE")
+GH_TOKEN = os.getenv("INPUT_GH_TOKEN")
+CHESS_USERNAME = os.getenv("INPUT_CHESS_USERNAME")
+REPOSITORY = os.getenv("INPUT_REPOSITORY")
+RATING_TYPE = os.getenv("INPUT_RATING_TYPE")
 print(f"Env: {GH_TOKEN}, {CHESS_USERNAME}, {REPOSITORY}, {RATING_TYPE}")
 
 
@@ -25,7 +25,9 @@ def decode_readme(data: str) -> str:
 
 def get_stats(username: str, type: str) -> str:
     """Get player stats"""
-    response = requests.get(f"https://api.chess.com/pub/player/{username}/stats")
+    url = f"https://api.chess.com/pub/player/{username}/stats"
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    response = requests.get(url, headers=headers)
     print(f"API Response: {response.status_code}")
     print(f"API Content: {response.content}")
     if response.status_code == 200:
