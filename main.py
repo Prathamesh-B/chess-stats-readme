@@ -5,10 +5,12 @@ import re
 import base64
 import requests
 
-GH_TOKEN = os.getenv("INPUT_GH_TOKEN")
-CHESS_USERNAME = os.getenv("INPUT_CHESS_USERNAME")
-REPOSITORY = os.getenv("INPUT_REPOSITORY")
-RATING_TYPE = os.getenv("INPUT_RATING_TYPE")
+GH_TOKEN = os.environ("INPUT_GH_TOKEN")
+CHESS_USERNAME = os.environ("INPUT_CHESS_USERNAME")
+REPOSITORY = os.environ("INPUT_REPOSITORY")
+RATING_TYPE = os.environ("INPUT_RATING_TYPE")
+print(f"Env: {GH_TOKEN}, {CHESS_USERNAME}, {REPOSITORY}, {RATING_TYPE}")
+
 
 START_COMMENT = "<!--START_SECTION:Chess-->"
 END_COMMENT = "<!--END_SECTION:Chess-->"
@@ -24,6 +26,8 @@ def decode_readme(data: str) -> str:
 def get_stats(username: str, type: str) -> str:
     """Get player stats"""
     response = requests.get(f"https://api.chess.com/pub/player/{username}/stats")
+    print(f"API Response: {response.status_code}")
+    print(f"API Content: {response.content}")
     if response.status_code == 200:
         stats_list = ["chess_rapid", "chess_blitz", "chess_bullet"]
         ratings = {}
@@ -50,10 +54,9 @@ if __name__ == "__main__":
     g = Github(GH_TOKEN)
     try:
         repo = g.get_repo(REPOSITORY)
+        print("Repo",repo)
     except GithubException:
-        print(
-            "Authentication Error. Try saving a GitHub Token in your Repo Secrets or Use the GitHub Actions Token, which is automatically used by the action."
-        )
+        print("Authentication Error. Try saving a GitHub Token in your Repo Secrets or Use the GitHub Actions Token, which is automatically used by the action.")
         sys.exit(1)
     contents = repo.get_readme()
     chess_stats = get_stats(CHESS_USERNAME, RATING_TYPE)

@@ -1,10 +1,14 @@
-FROM python:3.7
+FROM python:3-slim AS builder
+ADD . /app
+WORKDIR /app
 
-# Install dependencies.
-ADD requirements.txt /requirements.txt
-RUN pip install -r requirements.txt
+# We are installing a dependency here directly into our app source dir
+RUN pip install --target=/app -r requirements.txt
 
-# Copy code.
-ADD main.py /main.py
-
-CMD ["python", "/main.py"]
+# A distroless container image with Python and some basics like SSL certificates
+# https://github.com/GoogleContainerTools/distroless
+FROM gcr.io/distroless/python3-debian10
+COPY --from=builder /app /app
+WORKDIR /app
+ENV PYTHONPATH /app
+CMD ["/app/main.py"]
